@@ -113,7 +113,7 @@ function parentlogin(){
 
 
 
-function studentregister(){
+/* function studentregister(){
 	 
 	 var dept = document.getElementById("studentdepartment").value;
 	 var crse = document.getElementById("studentcourse").value;
@@ -138,7 +138,7 @@ function studentregister(){
 		
 	},JSON);
 	}
-}
+}  */
 
 
 function teacherregister(){
@@ -347,7 +347,6 @@ function createsubject(){
 	
 	 var stitle = document.getElementById("subjecttitle").value;
 	 var ssy = document.getElementById("subjectsy").value;
-	 var stg = document.getElementById("subjecttg").value;
 	 var sdept = document.getElementById("subjectdepartment").value;
 	 var scrse = document.getElementById("subjectcourse").value;
 	 var sys = document.getElementById("subjectys").value;
@@ -359,7 +358,7 @@ function createsubject(){
 	if(stitle == "" || sys == ""){
 	myApp.alert('<center><strong>Please fill all inputs</strong></center>');
 	}else{
-	$$.post(global_url, {action: 'createsubject',subjecttitle: stitle, subjectsy: ssy, subjecttg: stg, subjectdept: sdept, subjectcourse: scrse, subjectys: sys, subjectcode: scode, teacherid: teachid}, function (data,status) {
+	$$.post(global_url, {action: 'createsubject',subjecttitle: stitle, subjectsy: ssy, subjectdept: sdept, subjectcourse: scrse, subjectys: sys, subjectcode: scode, teacherid: teachid}, function (data,status) {
 		
 		console.log(data);
 		myApp.alert('<center><strong>Successfully Created Subject</strong><br>Subject Code: '+ gencode +'</center>');
@@ -1067,7 +1066,219 @@ function parentsetting(){
 
 
 
+////////////////////////////////////////////////////NEW CODE//////////////////////////////////////////////////
+////////////////////////////////////////////////////NEW CODE//////////////////////////////////////////////////
+////////////////////////////////////////////////////NEW CODE//////////////////////////////////////////////////
+////////////////////////////////////////////////////NEW CODE//////////////////////////////////////////////////
+////////////////////////////////////////////////////NEW CODE//////////////////////////////////////////////////
 
+
+function studentpreregister(){
+
+	 var id = document.getElementById("registeridnumber").value;
+	
+	$$.post(global_url, {action: 'registerfindid', idnumber: id}, function (data) {
+		
+		document.getElementById('register_form').innerHTML = "";
+		console.log(data);
+		
+		if (data == 1){
+		$$('#register_form').append('<div class="list-block input-list">'+
+									  '<ul>'+
+									  '<li><div class="item-content item-inner item-title item-divider"><center>Registeration Form</center></div></li>'+
+										'<li><a href="#" class="item-link smart-select">'+
+											'<select name="department" id="studentdepartment">'+
+											  '<option value="CE" selected="selected">CE</option>'+
+											  '<option value="CAS">CAS</option>'+
+											  '<option value="CCS">CCS</option>'+
+											  '<option value="ICHAMS">ICHAMS</option>'+
+											  '<option value="IA">IA</option>'+
+											  '<option value="IF">IF</option>'+
+											'</select>'+
+											'<div class="item-content">'+
+											  '<div class="item-inner">'+
+												'<div class="item-title">Department:</div>'+
+											  '</div>'+
+											'</div></a></li>'+
+										'<li><a href="#" class="item-link smart-select">'+
+											'<select name="course" id="studentcourse">'+
+											  '<option value="BAT" selected="selected">Bachelor of Agricultural Technology</option>'+
+											  '<option value="BAE">B.A. in English</option>'+
+											  '<option value="BAF">B.A. in Filipino</option>'+
+											  '<option value="BSA">B.S. Agriculture</option>'+
+											  '<option value="BSB">B.S. Biology</option>'+
+											  '<option value="BSCSL">B.S. Computer Science (Ladderized)</option>'+
+											  '<option value="BSCSS">B.S. Computer Science (Straight)</option>'+
+											  '<option value="BSEE">B.S. Elementary Education</option>'+
+											  '<option value="BSM">B.S. Mathematics</option>'+
+											  '<option value="BSMW">B.S. Midwifery</option>'+
+											  '<option value="BSN">B.S. Nursing</option>'+
+											  '<option value="BSP">B.S. Psychology</option>'+
+											  '<option value="BSSE">B.S. Secondary Education</option>'+
+											'</select>'+
+											'<div class="item-content">'+
+											  '<div class="item-inner">'+
+												'<div class="item-title">Course:</div>'+
+											  '</div>'+
+											'</div></a></li>'+
+										'<li><a href="#" class="item-link smart-select">'+
+											'<select name="y" id="studentyear">'+
+											  '<option value="I" selected="selected">I</option>'+
+											  '<option value="II">II</option>'+
+											  '<option value="III">III</option>'+
+											  '<option value="IV">IV</option>'+
+											  '<option value="1">1</option>'+
+											  '<option value="2">2</option>'+
+											  '<option value="3">3</option>'+
+											  '<option value="4">4</option>'+
+											'</select>'+
+											'<div class="item-content">'+
+											  '<div class="item-inner">'+
+												'<div class="item-title">Year:</div>'+
+											  '</div>'+
+											'</div></a></li>'+
+										'<li><a href="#" class="item-link smart-select">'+
+											'<select name="s" id="studentsection">'+
+											  '<option value="A" selected="selected">A</option>'+
+											  '<option value="B">B</option>'+
+											  '<option value="C">C</option>'+
+											  '<option value="D">D</option>'+
+											  '<option value="E">E</option>'+
+											  '<option value="F">F</option>'+
+											  '<option value="G">G</option>'+
+											  '<option value="H">H</option>'+
+											  '<option value="I">I</option>'+
+											  '<option value="J">J</option>'+
+											  '<option value="1">1</option>'+
+											  '<option value="2">2</option>'+
+											  '<option value="3">3</option>'+
+											  '<option value="4">4</option>'+
+											  '<option value="5">5</option>'+
+											  '<option value="6">6</option>'+
+											  '<option value="7">7</option>'+
+											  '<option value="8">8</option>'+
+											  '<option value="9">9</option>'+
+											'</select>'+
+											'<div class="item-content">'+
+											  '<div class="item-inner">'+
+												'<div class="item-title">Section:</div>'+
+											  '</div>'+
+											'</div></a></li>'+
+										'<li>'+
+										  '<div class="item-content">'+
+											'<div class="item-inner">'+
+											  '<div class="item-title floating-label">Full Name:</div>'+
+											  '<div class="item-input">'+
+												'<input type="text" placeholder="" id="studentname"/>'+
+											  '</div>'+
+											'</div>'+
+										  '</div>'+
+										'</li>'+
+										'<li>'+
+										  '<div class="item-content">'+
+											'<div class="item-inner">'+
+											  '<div class="item-title floating-label">Contact:</div>'+
+											  '<div class="item-input">'+
+												'<input type="text" placeholder="" id="studentcontactnumber"/>'+
+											  '</div>'+
+											'</div>'+
+										  '</div>'+
+										'</li>'+
+										'<li>'+
+										  '<div class="item-content">'+
+											'<div class="item-inner">'+
+											  '<div class="item-title floating-label">Username:</div>'+
+											  '<div class="item-input">'+
+												'<input type="text" placeholder="" id="studentusername"/>'+
+											  '</div>'+
+											'</div>'+
+										  '</div>'+
+										'</li>'+
+										'<li>'+
+										  '<div class="item-content">'+
+											'<div class="item-inner">'+
+											  '<div class="item-title floating-label">Password:</div>'+
+											  '<div class="item-input">'+
+												'<input type="password" placeholder="" id="studentpassword"/>'+
+											  '</div>'+
+											'</div>'+
+										  '</div>'+
+										'</li>'+
+									  '</ul>'+
+									'</div>'+
+		'<div class="content-block"><p class="buttons-row">'+
+			'<a href="#" class="button button-raised back link">Discard</a>'+
+			'<a href="index.html" id="registerstudentsuccess" style="display:none;">success</a>'+
+			'<a onclick="studentregister();" class="button button-raised button-fill color-red">Register</a>'+
+		'</p></div>');
+		}else if (data == 0){
+		myApp.alert('<center class="color-deeporange">Sorry you are not yet enrolled in the system. Please consult <br>your Adviser.<center>');
+		}
+		
+	},JSON);
+}
+
+function registerusernamepassword(){
+	
+	var sid = document.getElementById("registeridnumber").value;
+	var sdept = document.getElementById("studentdepartment").value;
+	var suname = document.getElementById("registerusername").value;
+	var spass = document.getElementById("registerpassword").value;
+
+	$$.post(global_url, {action: 'registerusernamepassword', studentid: sid, username: suname, password: spass}, function (data) {
+		
+		console.log(data);
+		myApp.alert('<center><strong>Registration Successful!</strong><br>Please login with your <strong>Username</strong> and <strong>password</strong>.</center>');
+		var success = document.getElementById("registerstudentsuccess");
+		success.click();
+		
+	},JSON);
+	
+}
+
+function studentregister(){
+	 
+	 var dept = document.getElementById("studentdepartment").value;
+	 var crse = document.getElementById("studentcourse").value;
+	 var sname = document.getElementById("studentname").value;
+	 var id = document.getElementById("registeridnumber").value;
+	 var y = document.getElementById("studentyear").value;
+	 var s = document.getElementById("studentsection").value;
+	 var contact = document.getElementById("studentcontactnumber").value;
+	 var uname = document.getElementById("studentusername").value;
+	 var pwd = document.getElementById("studentpassword").value;
+	 //var vcode = document.getElementById("studentvcode").value;
+	
+	if(dept == "" || crse == "" || sname == "" || id == "" || y == "" || s == "" || contact == "" || uname == "" || pwd == ""){
+	myApp.alert('<center><strong>Please fill all inputs</strong></center>');
+	}else{
+	$$.post(global_url, {action: 'registerstudent',department: dept, course: crse, name: sname, studentid: id, year: y, section: s, contactnumber: contact, username: uname, password: pwd}, function (data,status) {
+		
+		console.log(data);
+		
+		if(data == 1){
+			myApp.alert('<center><strong>Registration Successful!</strong><br>Please login with your <strong>Username</strong> and <strong>password</strong>.</center>');
+			var register = document.getElementById("registerstudentsuccess");
+			register.click();
+		}else{
+			myApp.alert('<center><strong>Sorry</strong><br>This account already exists in<br>the system. Please report this <br>issue to your adviser</center>');
+		}
+		
+		
+		
+	},JSON);
+	}
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
